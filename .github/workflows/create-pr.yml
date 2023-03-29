@@ -20,7 +20,7 @@ jobs:
           git clone https://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@github.com/devjorgecastro/test-github-action.git
           
           echo Listando directorios
-          ls
+          ls -a
           cd ..
           echo Ejecutando script
           chmod +x test/test-github-action/script.sh
