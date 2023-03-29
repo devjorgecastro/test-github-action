@@ -22,7 +22,7 @@ jobs:
           echo Listando directorios
           ls
           echo Ejecutando script ./test/script.sh
-          ./test
+          ./test/script.sh
           echo Mostrando nuevo contenido
           ls
           echo ...........
