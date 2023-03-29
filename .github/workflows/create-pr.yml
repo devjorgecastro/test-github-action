@@ -1,0 +1,16 @@
+name: Update Tokens in Release
+on:
+  issue_comment:
+    type: [created]
+
+jobs:
+  pr_commented:
+  # This job only runs for pull request comments
+    name: PR Comment
+    if: ${{ github.event.issue.pull_request }}
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          echo A Comment on PR $NUMBER
+        env:
+          NUMBER: ${{ github.event.issue.number }}
