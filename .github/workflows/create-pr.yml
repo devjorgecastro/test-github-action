@@ -11,20 +11,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: |
-          cd ..
-          mkdir test
-          cd test
+          cd .. && mkdir test && cd test
           git clone https://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@github.com/devjorgecastro/test-github-action.git
-          cd ..
-          echo Listando directorios
+          cd .. # ./root
+          echo <<< List root dir >>>
           ls -a
-          # cd ..
-          # echo Ejecutando script
+          echo <<< Running script >>>
           chmod +x ./test/test-github-action/script.sh
           ./test/test-github-action/script.sh
-          echo Mostrando nuevo contenido
-          cd test-github-action
-          ls
+          echo <<< Mostrando nuevo contenido >>>
+          #cd test-github-action
+          ls -a
           # echo ...........
           # echo A Comment on PR $NUMBER
         env:
