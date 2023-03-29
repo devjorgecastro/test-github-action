@@ -11,9 +11,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: |
-          echo Contenido original
-          ls
-          echo ...........
           cd ..
           mkdir test
           cd test
@@ -25,8 +22,9 @@ jobs:
           # echo Ejecutando script
           chmod +x ./test/test-github-action/script.sh
           ./test/test-github-action/script.sh
-          # echo Mostrando nuevo contenido
-          # ls
+          echo Mostrando nuevo contenido
+          cd test-github-action
+          ls
           # echo ...........
           # echo A Comment on PR $NUMBER
         env:
