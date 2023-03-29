@@ -16,10 +16,10 @@ jobs:
           cd ..
           echo '<<< List root dir >>>'
           ls -a
-          echo <<< Running script >>>
+          echo '<<< Running script >>>'
           chmod +x ./test/test-github-action/script.sh
           ./test/test-github-action/script.sh
-          echo <<< Mostrando nuevo contenido >>>
+          echo '<<< Mostrando nuevo contenido >>>''
           #cd test-github-action
           ls -a
           # echo ...........
