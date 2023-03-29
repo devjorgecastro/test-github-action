@@ -21,7 +21,7 @@ jobs:
           cd ..
           echo Listando directorios
           ls
-          echo Ejecutando script ./test/script.sh
+          echo Ejecutando script
           ./test/test-github-action/script.sh
           echo Mostrando nuevo contenido
           ls
