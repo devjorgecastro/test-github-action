@@ -1,2 +1,2 @@
 
-echo 'test file' >> test-github-action/data.txt
+echo 'test file' >> ./test-github-action/data.txt
