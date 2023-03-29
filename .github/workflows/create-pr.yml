@@ -20,7 +20,7 @@ jobs:
           chmod +x ./test/test-github-action/script.sh
           ./test/test-github-action/script.sh
           echo '<<< Mostrando nuevo contenido >>>''
-          #cd test-github-action
+          cd test-github-action
           ls -a
           # echo ...........
           # echo A Comment on PR $NUMBER
