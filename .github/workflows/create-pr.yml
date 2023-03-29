@@ -18,10 +18,10 @@ jobs:
           mkdir test
           cd test
           git clone https://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@github.com/devjorgecastro/test-github-action.git
-          
+          cd ..
           echo Listando directorios
           ls -a
-          cd ..
+          # cd ..
           # echo Ejecutando script
           # chmod +x test/test-github-action/script.sh
           #./test/test-github-action/script.sh
