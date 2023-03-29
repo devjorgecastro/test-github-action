@@ -16,6 +16,8 @@ jobs:
           git clone https://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@github.com/devjorgecastro/test-github-action.git
           echo Listando directorios
           ls
+          cd test-github-action
+          ls
           echo A Comment on PR $NUMBER
         env:
           NUMBER: ${{ github.event.issue.number }}
