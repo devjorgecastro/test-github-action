@@ -17,6 +17,7 @@ jobs:
           echo Listando directorios
           ls
           cd test-github-action
+          git clone https://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@github.com/devjorgecastro/test-github-action.git
           ls
           echo A Comment on PR $NUMBER
         env:
