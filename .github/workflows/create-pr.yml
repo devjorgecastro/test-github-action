@@ -60,11 +60,11 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GH_ACTION_TOKEN }}
           GITHUB_USER: devjorgecastro
         run: |
+          git remote set-url origin https://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:x-oauth-basic@github.com/devjorgecastro/test-github-action.git
           git remote -v
           git add .
           git commit -m 'Tokens were updated'
           echo '<<< Push new Branch >>>'
-          echo ${{ secrets.GH_ACTION_TOKEN }}
           git push -u origin chore/update-tokens
 
       - name: Create Pull Request
