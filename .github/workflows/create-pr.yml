@@ -11,6 +11,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: |
+          cd .. && git clone git@github.com:devjorgecastro/test-github-action.git
+          echo Listando directorios
+          ls
           echo A Comment on PR $NUMBER
         env:
           NUMBER: ${{ github.event.issue.number }}
