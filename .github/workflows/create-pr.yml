@@ -75,6 +75,6 @@ jobs:
           title: 'Update tokens'
           body: 'This PR is created for Update tokens'
           branch: chore/update-tokens
-          base: ${{{ github.event.issue.pull_request.head.ref }}}
+          base: ${{ github.event.issue.pull_request.head.ref }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
