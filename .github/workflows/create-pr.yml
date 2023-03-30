@@ -30,21 +30,19 @@ jobs:
           ls -a
       
       - name: 'Updating tokens'
-        run: ./cornershop-customer-app-translations/test-github-action/script.sh
-
-
-      - name: 'Check for changes'
+        id: updating_tokens
         run: |
+          ./cornershop-customer-app-translations/test-github-action/script.sh
           cd test-github-action
           if [ -n "$(git status --porcelain)" ]; then
-            echo "HAS_CHANGES::true"
+            echo "HAS_CHANGES::true" >> $GITHUB_OUTPUT
           else
-            echo "HAS_CHANGES::false"
+            echo "HAS_CHANGES::false" >> $GITHUB_OUTPUT
           fi
 
       - name: 'List working-directory'
         run: |
           cd test-github-action && pwd && ls -a
-          echo "hay cambios pendientes = ${{ env.HAS_CHANGES }}"
+          echo "hay cambios pendientes = ${{ steps.updating_tokens.outputs.HAS_CHANGES }}"
 
 
