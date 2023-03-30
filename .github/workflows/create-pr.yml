@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: "Cloning repository"
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       
       #- name: Set up Git
       #  run: git config --global credential.helper store
@@ -73,12 +73,10 @@ jobs:
         uses: peter-evans/create-pull-request@v4
         with:
           base: release/1.0.0
-          head: chore/update-tokens
+          branch: chore/update-tokens
           title: Titulo de Prueba
           body: |
             Esta es una descripcion de prueba de varias lineas
             Esta es la segunda linea en la descripcion.
             Este es otro parrafo en la tercera linea de la descripcion del PR
           token: ${{ secrets.GH_ACTION_TOKEN }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GH_ACTION_TOKEN }}
