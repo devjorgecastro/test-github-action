@@ -38,14 +38,9 @@ jobs:
             echo "HAS_CHANGES=false" >> $GITHUB_OUTPUT
           fi
 
-      - name: 'Create Pull Request'
+      - name: 'Saving changes'
         if: ${{ steps.updating_tokens.outputs.HAS_CHANGES }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          pwd && ls -a
-          echo "hay cambios pendientes = ${{ steps.updating_tokens.outputs.HAS_CHANGES }}"
-
+        run: git add .; git commit -m 'Tokens were updated'; git push
 
       - name: Create Pull Request
         id: create_pull_request
