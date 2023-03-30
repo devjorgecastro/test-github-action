@@ -44,7 +44,6 @@ jobs:
           pwd && ls -a
           ./cornershop-customer-app-translations/test-github-action/script.sh
           echo 'Showing remote'
-          git remote -v
           cd test-github-action
           echo '<<< current branch >>>'
           git branch --show-current
