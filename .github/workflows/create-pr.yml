@@ -45,9 +45,9 @@ jobs:
           ./cornershop-customer-app-translations/test-github-action/script.sh
           echo 'Showing remote'
           git remote -v
+          cd test-github-action
           echo '<<< current branch >>>'
           git branch --show-current
-          cd test-github-action
           if [ -n "$(git status --porcelain)" ]; then
             echo "HAS_CHANGES=true" >> $GITHUB_OUTPUT
           else
