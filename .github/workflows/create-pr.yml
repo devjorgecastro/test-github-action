@@ -41,6 +41,7 @@ jobs:
           fi
 
       - name: 'List working-directory'
+        if: ${{ steps.updating_tokens.outputs.HAS_CHANGES == false }}
         run: |
           cd test-github-action && pwd && ls -a
           echo "hay cambios pendientes = ${{ steps.updating_tokens.outputs.HAS_CHANGES }}"
