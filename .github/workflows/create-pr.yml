@@ -19,10 +19,14 @@ jobs:
       - name: 'Cloning cornershop-customer-app-translation'
         # cornershop-customer-app-translations is created because the cloned repository is the same
         run: |
-          cd .. && pwd && mkdir cornershop-customer-app-translations && cd cornershop-customer-app-translations
+          cd .. && mkdir cornershop-customer-app-translations && cd cornershop-customer-app-translations
           git clone https://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@github.com/devjorgecastro/test-github-action.git
           chmod +x ./test-github-action/script.sh
           cd ../test-github-action
           ls -a
+        working-directory: ../
+
+      - name: 'List working-directory'
+        run: pwd && ls -a
 
 
