@@ -71,6 +71,7 @@ jobs:
           echo '<<< git pull >>>'
           git log -1
           git pull
+          git push
 
       - name: Create Pull Request
         id: create_pull_request
