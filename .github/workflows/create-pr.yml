@@ -47,4 +47,7 @@ jobs:
           echo "hay cambios pendientes = ${{ steps.updating_tokens.outputs.HAS_CHANGES }}"
 
       - name: 'Check pull request branch'
-        run: echo ${{ github.event.pull_request.head.ref }}
+        run: |
+          echo ${{ github.event.pull_request.head.ref }}
+          echo ${{ github.event.pull_request.base.ref }}
+          echo ${{ github.event.number }}
