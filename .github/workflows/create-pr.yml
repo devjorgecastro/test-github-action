@@ -10,9 +10,11 @@ jobs:
     if: contains(github.event.comment.body, '/update-tokens') && github.event.issue.pull_request
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: "Test name second"
-      - run: |
+      - name: "Cloning repository"
+        uses: actions/checkout@v2
+      
+      - name: "Run process"
+        run: |
           echo 'Current branch'
           pwd
           ls -a
