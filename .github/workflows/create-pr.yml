@@ -33,6 +33,7 @@ jobs:
         id: updating_tokens
         working-directory: ../
         run: |
+          pwd && ls -a
           ./cornershop-customer-app-translations/test-github-action/script.sh
           cd test-github-action
           if [ -n "$(git status --porcelain)" ]; then
