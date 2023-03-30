@@ -22,7 +22,7 @@ jobs:
           cd .. && mkdir cornershop-customer-app-translations && cd cornershop-customer-app-translations
           git clone https://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@github.com/devjorgecastro/test-github-action.git
           chmod +x ./test-github-action/script.sh
-          cd ../test-github-action
+          cd ..
           ls -a
         working-directory: ../
 
