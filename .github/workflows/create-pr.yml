@@ -49,6 +49,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GH2_TOKEN }}
         run: |
+          git remote -v
           git add .
           git commit -m 'Tokens were updated'
           git push -u origin chore/update-tokens
