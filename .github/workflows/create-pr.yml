@@ -23,7 +23,7 @@ jobs:
         run: |
           git fetch
           git checkout release/1.0.0
-          git checkout -b chore/update-tokens2
+          git checkout -b chore/update-tokens
 
       - name: Initialize bot git config
         run: |
@@ -58,8 +58,6 @@ jobs:
 
       - name: 'Saving changes'
         if: ${{ steps.updating_tokens.outputs.HAS_CHANGES }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GH_ACTION_TOKEN }}
         run: |
           git branch --show-current
           pwd && ls -a
@@ -70,11 +68,13 @@ jobs:
           git commit -m 'Tokens were updated'
           git log -1
           echo '<<< Push new Branch >>>'
-          git push --set-upstream origin chore/update-tokens2
+          git push --set-upstream origin chore/update-tokens
           echo '<<< git pull >>>'
           git log -1
           git pull
-          git push
+          git push -f
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Create Pull Request
         id: create_pull_request
@@ -82,7 +82,7 @@ jobs:
         uses: peter-evans/create-pull-request@v4
         with:
           base: release/1.0.0
-          branch: chore/update-tokens2
+          branch: chore/update-tokens
           title: Titulo de Prueba
           body: |
             Esta es una descripcion de prueba de varias lineas
