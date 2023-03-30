@@ -17,7 +17,7 @@ jobs:
         run: git config --global credential.helper store
 
       - name: Authenticate with Github
-        run: echo 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 > ~/.github_token && git config --global credential.helper 'store --file ~/.github_token'
+        run: echo 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 > ~/.github_token && git config --global credential.helper 'store --file ~/.github_token'
 
       - name: "Create new branch"
         run: git checkout -b chore/update-tokens
@@ -26,14 +26,14 @@ jobs:
         run: |
           git config user.name 'Jorge Castro'
           git config user.email 'dev.jorgecastro@gmail.com'
-          #git remote set-url origin https://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@github.com/devjorgecastro/test-github-action.git
+          #git remote set-url origin https://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@github.com/devjorgecastro/test-github-action.git
 
       - name: 'Cloning cornershop-customer-app-translation'
         # cornershop-customer-app-translations is created because the cloned repository is the same
         working-directory: ../
         run: |
           mkdir cornershop-customer-app-translations && cd cornershop-customer-app-translations
-          git clone https://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@github.com/devjorgecastro/test-github-action.git
+          git clone https://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@github.com/devjorgecastro/test-github-action.git
           chmod +x ./test-github-action/script.sh
 
       
