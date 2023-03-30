@@ -65,6 +65,7 @@ jobs:
           git remote -v
           git add .
           git commit -m 'Tokens were updated'
+          git log -1
           echo '<<< Push new Branch >>>'
           git push -u origin chore/update-tokens
 
