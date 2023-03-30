@@ -48,7 +48,7 @@ jobs:
         if: ${{ steps.updating_tokens.outputs.HAS_CHANGES }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GITHUB_USER: ${{ secrets.GITHUB_USER }}
+          GITHUB_USER: devjorgecastro
         run: |
           git remote -v
           git add .
