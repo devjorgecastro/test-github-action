@@ -16,6 +16,7 @@ jobs:
       - name: 'Create file tes'
         run: |
           pwd && ls -a
+          echo 'test file' >> data.txt
       #- name: Set up Git
       #  run: git config --global credential.helper store
 
@@ -31,38 +32,14 @@ jobs:
           git config user.email 'dev.jorgecastro@gmail.com'
           #git remote set-url origin https://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@github.com/devjorgecastro/test-github-action.git
 
-      - name: 'Cloning cornershop-customer-app-translation'
-        # cornershop-customer-app-translations is created because the cloned repository is the same
-        working-directory: ../
-        run: |
-          mkdir cornershop-customer-app-translations && cd cornershop-customer-app-translations
-          git clone https://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@github.com/devjorgecastro/test-github-action.git
-          chmod +x ./test-github-action/script.sh
-
-      
-      - name: 'Updating tokens'
-        id: updating_tokens
-        working-directory: ../
-        run: |
-          pwd && ls -a
-          ./cornershop-customer-app-translations/test-github-action/script.sh
-          cd cornershop-customer-app-translations/test-github-action/
-          echo 'Showing remote'
-          git remote -v
-          cd ../..
-          cd test-github-action
-          if [ -n "$(git status --porcelain)" ]; then
-            echo "HAS_CHANGES=true" >> $GITHUB_OUTPUT
-          else
-            echo "HAS_CHANGES=false" >> $GITHUB_OUTPUT
-          fi
 
       - name: 'Saving changes'
-        if: ${{ steps.updating_tokens.outputs.HAS_CHANGES }}
+        #if: ${{ steps.updating_tokens.outputs.HAS_CHANGES }}
         env:
           GITHUB_TOKEN: ${{ secrets.GH_ACTION_TOKEN }}
           GITHUB_USER: devjorgecastro
         run: |
+          pwd && ls -a
           #git remote set-url origin https://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:x-oauth-basic@github.com/devjorgecastro/test-github-action.git
           git remote -v
           git add .
