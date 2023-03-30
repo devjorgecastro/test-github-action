@@ -21,6 +21,7 @@ jobs:
 
       - name: "Create new branch"
         run: |
+          git fetch
           git checkout release/1.0.0
           git checkout -b chore/update-tokens2
 
