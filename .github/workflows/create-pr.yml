@@ -25,7 +25,6 @@ jobs:
           cd ..
           pwd
           ls -a
-        working-directory: ../
 
       - name: 'List working-directory'
         run: pwd && ls -a
