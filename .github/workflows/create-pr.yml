@@ -28,34 +28,23 @@ jobs:
           cd ..
           pwd
           ls -a
-
-      - name: 'Check for changes'
-        run: |
-          cd test-github-action
-          if [ -n "$(git status --porcelain)" ]; then
-            echo "true"
-            echo "::set-output name=changes::yes"
-          else
-            echo "false"
-            echo "::set-output name=changes::no"
-          fi
       
       - name: 'Updating tokens'
         run: ./cornershop-customer-app-translations/test-github-action/script.sh
 
 
-      - name: 'Check for changes 2'
+      - name: 'Check for changes'
         run: |
           cd test-github-action
           if [ -n "$(git status --porcelain)" ]; then
-            echo "true"
-            echo "::set-output name=changes::yes"
+            echo "HAS_CHANGES::true"
           else
-            echo "false"
-            echo "::set-output name=changes::no"
+            echo "HAS_CHANGES::false"
           fi
 
       - name: 'List working-directory'
-        run: cd test-github-action && pwd && ls -a
+        run: |
+          cd test-github-action && pwd && ls -a
+          echo "hay cambios pendientes = ${{ env.HAS_CHANGES }}"
 
 
