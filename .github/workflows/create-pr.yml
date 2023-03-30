@@ -10,7 +10,7 @@ jobs:
     if: contains(github.event.comment.body, '/update-tokens') && github.event.issue.pull_request
     runs-on: ubuntu-latest
     steps:
-      -uses: actions/checkout@v2
+      - uses: actions/checkout@v2
       - run: |
           echo 'Current branch'
           pwd
