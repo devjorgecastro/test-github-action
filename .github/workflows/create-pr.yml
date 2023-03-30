@@ -51,3 +51,4 @@ jobs:
           echo ${{ github.event.pull_request.head.ref }}
           echo ${{ github.event.pull_request.base.ref }}
           echo ${{ github.event.number }}
+          echo ${{ github.event.comment.body }}
