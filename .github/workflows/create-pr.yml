@@ -69,8 +69,8 @@ jobs:
 
       - name: Create Pull Request
         id: create_pull_request
-        #if: ${{ steps.updating_tokens.outputs.HAS_CHANGES }}
-        uses: peter-evans/create-pull-request@v4.2.4
+        if: ${{ steps.updating_tokens.outputs.HAS_CHANGES }}
+        uses: peter-evans/create-pull-request@v4
         with:
           base: release/1.0.0
           head: chore/update-tokens
@@ -79,5 +79,6 @@ jobs:
             Esta es una descripcion de prueba de varias lineas
             Esta es la segunda linea en la descripcion.
             Este es otro parrafo en la tercera linea de la descripcion del PR
+          token: ${{ secrets.GH_ACTION_TOKEN }}
         env:
           GITHUB_TOKEN: ${{ secrets.GH_ACTION_TOKEN }}
