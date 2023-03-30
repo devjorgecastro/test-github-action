@@ -72,9 +72,10 @@ jobs:
           echo '<<< git pull >>>'
           git log -1
           git pull
-          git push origin chore/update-tokens
+          git push origin chore/update-tokens -f
           ls -a
           git ls-remote --heads origin chore/update-tokens
+          git branch -vv
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
