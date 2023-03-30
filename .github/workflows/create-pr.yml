@@ -28,9 +28,30 @@ jobs:
           cd ..
           pwd
           ls -a
+
+      - name: 'Check for changes'
+        run: |
+          if [ -n "$(git status --porcelain)" ]; then
+            echo "true"
+            echo "::set-output name=changes::yes"
+          else
+            "false"
+            echo "::set-output name=changes::no"
+          fi
       
       - name: 'Updating tokens'
         run: ./cornershop-customer-app-translations/test-github-action/script.sh
+
+
+      - name: 'Check for changes 2'
+        run: |
+          if [ -n "$(git status --porcelain)" ]; then
+            echo "true"
+            echo "::set-output name=changes::yes"
+          else
+            "false"
+            echo "::set-output name=changes::no"
+          fi
 
       - name: 'List working-directory'
         run: cd test-github-action && pwd && ls -a
