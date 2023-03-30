@@ -37,6 +37,10 @@ jobs:
         run: |
           pwd && ls -a
           ./cornershop-customer-app-translations/test-github-action/script.sh
+          cd cornershop-customer-app-translations/test-github-action/
+          echo 'Showing remote'
+          git remote -v
+          cd ../..
           cd test-github-action
           if [ -n "$(git status --porcelain)" ]; then
             echo "HAS_CHANGES=true" >> $GITHUB_OUTPUT
