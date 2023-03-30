@@ -13,6 +13,7 @@ jobs:
       - run: |
           echo 'Current branch'
           pwd
+          ls -a
           git rev-parse --abbrev-ref HEAD
           echo 'Initial Dir'
           pwd
