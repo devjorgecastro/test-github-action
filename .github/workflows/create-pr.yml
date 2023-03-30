@@ -75,7 +75,6 @@ jobs:
           git push origin chore/update-tokens
           ls -a
           git ls-remote --heads origin chore/update-tokens
-          git branch -vv
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
