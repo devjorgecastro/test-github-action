@@ -56,7 +56,7 @@ jobs:
       - name: 'Saving changes'
         if: ${{ steps.updating_tokens.outputs.HAS_CHANGES }}
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GH_ACTION_TOKEN }}
         run: |
           git branch --show-current
           pwd && ls -a
