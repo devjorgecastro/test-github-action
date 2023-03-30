@@ -64,6 +64,7 @@ jobs:
           git add .
           git commit -m 'Tokens were updated'
           echo '<<< Push new Branch >>>'
+          echo ${{ secrets.GH_ACTION_TOKEN }}
           git push -u origin chore/update-tokens
 
       - name: Create Pull Request
