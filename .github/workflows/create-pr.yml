@@ -14,23 +14,6 @@ jobs:
           echo 'Current branch'
           pwd
           ls -a
-          git rev-parse --abbrev-ref HEAD
-          echo 'Initial Dir'
-          pwd
-          ls -a
-          echo 'Creating test dir in root'
-          cd .. && mkdir test && cd test
-          git clone https://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@github.com/devjorgecastro/test-github-action.git
-          cd ..
-          echo '<<< List root dir >>>'
-          ls -a
-          echo '<<< Running script >>>'
-          chmod +x ./test/test-github-action/script.sh
-          ./test/test-github-action/script.sh
-          echo '<<< Mostrando nuevo contenido >>>''
-          cd test-github-action
-          ls -a
-          # echo ...........
-          # echo A Comment on PR $NUMBER
+          
         env:
           NUMBER: ${{ github.event.issue.number }}
