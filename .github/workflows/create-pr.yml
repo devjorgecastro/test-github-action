@@ -4,14 +4,31 @@ on:
     type: [created]
 
 jobs:
-  deploy-check:
+  pr_commented:
+  # This job only runs for pull request comments
+    name: PR Comment
+    if: contains(github.event.comment.body, '/update-tokens') && github.event.issue.pull_request
     runs-on: ubuntu-latest
     steps:
-      - name: acknowledge deployment request to commenter
-        id: check
-        uses: khan/pull-request-comment-trigger@master
-        with:
-          trigger: "/upadte-tokens"
-          reaction: rocket
+      - run: |
+          echo 'Current branch'
+          git rev-parse --abbrev-ref HEAD
+          echo 'Initial Dir'
+          pwd
+          ls -a
+          echo 'Creating test dir in root'
+          cd .. && mkdir test && cd test
+          git clone https://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@github.com/devjorgecastro/test-github-action.git
+          cd ..
+          echo '<<< List root dir >>>'
+          ls -a
+          echo '<<< Running script >>>'
+          chmod +x ./test/test-github-action/script.sh
+          ./test/test-github-action/script.sh
+          echo '<<< Mostrando nuevo contenido >>>''
+          cd test-github-action
+          ls -a
+          # echo ...........
+          # echo A Comment on PR $NUMBER
         env:
-          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+          NUMBER: ${{ github.event.issue.number }}
