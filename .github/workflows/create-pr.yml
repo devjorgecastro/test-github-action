@@ -44,6 +44,8 @@ jobs:
           pwd && ls -a
           ./cornershop-customer-app-translations/test-github-action/script.sh
           cd cornershop-customer-app-translations/test-github-action/
+          echo 'Again'
+          ls -a
           echo 'Showing remote'
           git remote -v
           cd ../..
