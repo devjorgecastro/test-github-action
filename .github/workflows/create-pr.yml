@@ -17,7 +17,7 @@ jobs:
         run: git config --global credential.helper store
 
       - name: Authenticate with Github
-        run: echo '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' > ~/.github_token && git config --global credential.helper 'store --file ~/.github_token'
+        run: echo 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 > ~/.github_token && git config --global credential.helper 'store --file ~/.github_token'
 
       - name: "Create new branch"
         run: git checkout -b chore/update-tokens
