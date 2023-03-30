@@ -76,17 +76,3 @@ jobs:
           git branch -vv
         env:
           GITHUB_TOKEN: ${{ secrets.GH_ACTION_TOKEN }}
-
-      - name: Create Pull Request
-        id: create_pull_request
-        if: ${{ steps.updating_tokens.outputs.HAS_CHANGES }}
-        uses: peter-evans/create-pull-request@v4
-        with:
-          base: release/1.0.0
-          branch: chore/update-tokens
-          title: Titulo de Prueba
-          body: |
-            Esta es una descripcion de prueba de varias lineas
-            Esta es la segunda linea en la descripcion.
-            Este es otro parrafo en la tercera linea de la descripcion del PR
-          token: ${{ secrets.GH_ACTION_TOKEN }}
