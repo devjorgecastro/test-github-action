@@ -9,6 +9,9 @@ jobs:
     name: PR Comment
     if: contains(github.event.comment.body, '/update-tokens') && github.event.issue.pull_request
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ../
     steps:
       - name: "Cloning repository"
         uses: actions/checkout@v2
@@ -18,7 +21,6 @@ jobs:
 
       - name: 'Cloning cornershop-customer-app-translation'
         # cornershop-customer-app-translations is created because the cloned repository is the same
-        working-directory: ../
         run: |
           mkdir cornershop-customer-app-translations && cd cornershop-customer-app-translations
           git clone https://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@github.com/devjorgecastro/test-github-action.git
