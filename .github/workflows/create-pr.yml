@@ -15,13 +15,12 @@ jobs:
     steps:
       - name: "Cloning repository"
         uses: actions/checkout@v2
+      
+      - name: "List current directory"
         run: |
           pwd && ls -a
           git checkout -b chore/update-tokens
           git branch --show-current
-      
-      - name: "List current directory"
-        run: pwd && ls -a
 
       - name: 'Cloning cornershop-customer-app-translation'
         # cornershop-customer-app-translations is created because the cloned repository is the same
