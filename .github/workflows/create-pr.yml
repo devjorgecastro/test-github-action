@@ -47,16 +47,15 @@ jobs:
           echo "hay cambios pendientes = ${{ steps.updating_tokens.outputs.HAS_CHANGES }}"
 
 
-      - name: 'Create Pull Request'
+      - name: Create Pull Request
         id: create_pull_request
-        if: ${{ steps.updating_tokens.outputs.HAS_CHANGES }}
+        #if: ${{ steps.updating_tokens.outputs.HAS_CHANGES }}
         uses: octokit/request-action@v2.x
         with:
           route: POST /repos/:repo/issues/:issue_id/comments
           repo: ${{ github.repository }}
           issue_id: ${{ github.event.issue.number }}
           body: |
-            |
             This PR is created for Update tokens
-          env:
-            GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
