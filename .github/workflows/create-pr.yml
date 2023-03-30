@@ -20,7 +20,9 @@ jobs:
       #  run: echo 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 > ~/.github_token && git config --global credential.helper 'store --file ~/.github_token'
 
       - name: "Create new branch"
-        run: git checkout -b chore/update-tokens
+        run: |
+          git checkout release/1.0.0
+          git checkout -b chore/update-tokens2
 
       - name: Initialize bot git config
         run: |
@@ -67,7 +69,7 @@ jobs:
           git commit -m 'Tokens were updated'
           git log -1
           echo '<<< Push new Branch >>>'
-          git push --set-upstream origin chore/update-tokens
+          git push --set-upstream origin chore/update-tokens2
           echo '<<< git pull >>>'
           git log -1
           git pull
@@ -79,7 +81,7 @@ jobs:
         uses: peter-evans/create-pull-request@v4
         with:
           base: release/1.0.0
-          branch: chore/update-tokens
+          branch: chore/update-tokens2
           title: Titulo de Prueba
           body: |
             Esta es una descripcion de prueba de varias lineas
