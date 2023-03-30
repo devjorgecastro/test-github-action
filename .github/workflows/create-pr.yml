@@ -13,11 +13,11 @@ jobs:
       - name: "Cloning repository"
         uses: actions/checkout@v2
       
-      - name: Set up Git
-        run: git config --global credential.helper store
+      #- name: Set up Git
+      #  run: git config --global credential.helper store
 
-      - name: Authenticate with Github
-        run: echo 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 > ~/.github_token && git config --global credential.helper 'store --file ~/.github_token'
+      #- name: Authenticate with Github
+      #  run: echo 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 > ~/.github_token && git config --global credential.helper 'store --file ~/.github_token'
 
       - name: "Create new branch"
         run: git checkout -b chore/update-tokens
@@ -57,7 +57,7 @@ jobs:
       - name: 'Saving changes'
         if: ${{ steps.updating_tokens.outputs.HAS_CHANGES }}
         env:
-          GITHUB_TOKEN: ${{ secrets.GH2_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GH_ACTION_TOKEN }}
           GITHUB_USER: devjorgecastro
         run: |
           git remote -v
@@ -76,4 +76,4 @@ jobs:
           body: |
             This PR is created for Update tokens
         env:
-          GITHUB_TOKEN: ${{ secrets.GH2_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GH_ACTION_TOKEN }}
