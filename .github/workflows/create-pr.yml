@@ -43,7 +43,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          cd test-github-action && pwd && ls -a
+          pwd && cd test-github-action && pwd && ls -a
           echo "hay cambios pendientes = ${{ steps.updating_tokens.outputs.HAS_CHANGES }}"
 
       - name: 'Check pull request branch'
