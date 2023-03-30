@@ -23,6 +23,7 @@ jobs:
           git clone https://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@github.com/devjorgecastro/test-github-action.git
           chmod +x ./test-github-action/script.sh
           cd ..
+          pwd
           ls -a
         working-directory: ../
 
