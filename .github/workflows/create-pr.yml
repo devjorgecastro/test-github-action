@@ -47,7 +47,8 @@ jobs:
       - name: 'Saving changes'
         if: ${{ steps.updating_tokens.outputs.HAS_CHANGES }}
         env:
-          GITHUB_TOKEN: ${{ secrets.GH2_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_USER: ${{ secrets.GITHUB_USER }}
         run: |
           git remote -v
           git add .
