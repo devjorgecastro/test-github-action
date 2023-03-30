@@ -43,12 +43,10 @@ jobs:
         run: |
           pwd && ls -a
           ./cornershop-customer-app-translations/test-github-action/script.sh
-          cd cornershop-customer-app-translations/test-github-action/
-          echo 'Again'
-          ls -a
           echo 'Showing remote'
           git remote -v
-          cd ../..
+          echo '<<< current branch >>>'
+          git branch --show-current
           cd test-github-action
           if [ -n "$(git status --porcelain)" ]; then
             echo "HAS_CHANGES=true" >> $GITHUB_OUTPUT
@@ -61,6 +59,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          git branch --show-current
           pwd && ls -a
           #git remote set-url origin https://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@github.com/devjorgecastro/test-github-action.git
           #git remote set-url origin https://x-access-token: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@github.com/devjorgecastro/test-github-action.git
