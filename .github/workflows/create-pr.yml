@@ -77,4 +77,4 @@ jobs:
           branch: chore/update-tokens
           base: ${{ github.event.issue.pull_request.head.ref }}
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GH_ACTION_TOKEN }}
