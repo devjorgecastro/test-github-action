@@ -72,7 +72,7 @@ jobs:
           echo '<<< git pull >>>'
           git log -1
           git pull
-          git push -f
+          git push origin chore/update-tokens
           ls -a
           git status
         env:
