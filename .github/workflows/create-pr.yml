@@ -31,6 +31,7 @@ jobs:
       
       - name: 'Updating tokens'
         id: updating_tokens
+        working-directory: ../
         run: |
           ./cornershop-customer-app-translations/test-github-action/script.sh
           cd test-github-action
