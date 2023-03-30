@@ -13,11 +13,10 @@ jobs:
       - name: "Cloning repository"
         uses: actions/checkout@v2
       
-      - name: "List current directory"
+      - name: "Create new branch"
         run: |
-          pwd && ls -a
-          git checkout -b chore/update-tokens
-          git branch --show-current
+        echo ${{ github.workspace }}
+        git checkout -b chore/update-tokens
 
       - name: 'Cloning cornershop-customer-app-translation'
         # cornershop-customer-app-translations is created because the cloned repository is the same
@@ -26,9 +25,7 @@ jobs:
           mkdir cornershop-customer-app-translations && cd cornershop-customer-app-translations
           git clone https://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@github.com/devjorgecastro/test-github-action.git
           chmod +x ./test-github-action/script.sh
-          cd ..
-          pwd
-          ls -a
+
       
       - name: 'Updating tokens'
         id: updating_tokens
