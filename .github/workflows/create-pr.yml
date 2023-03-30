@@ -12,7 +12,6 @@ jobs:
     steps:
       - run: |
           echo 'Initial Dir'
-          cd ../..
           pwd
           ls -a
           echo 'Creating test dir in root'
