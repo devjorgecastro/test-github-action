@@ -70,12 +70,11 @@ jobs:
       - name: Create Pull Request
         id: create_pull_request
         #if: ${{ steps.updating_tokens.outputs.HAS_CHANGES }}
-        uses: octokit/request-action@v2.x
+        uses: peter-evans/create-pull-request@v3
         with:
-          route: POST /repos/:repo/issues/:issue_id/comments
-          repo: ${{ github.repository }}
-          issue_id: ${{ github.event.issue.number }}
-          body: |
-            This PR is created for Update tokens
+          title: 'Update tokens'
+          body: 'This PR is created for Update tokens'
+          branch: chore/update-tokens
+          base: ${{{ github.event.issue.pull_request.head.ref }}}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
