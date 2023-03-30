@@ -35,7 +35,7 @@ jobs:
             echo "true"
             echo "::set-output name=changes::yes"
           else
-            "false"
+            echo "false"
             echo "::set-output name=changes::no"
           fi
       
