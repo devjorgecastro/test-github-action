@@ -12,6 +12,7 @@ jobs:
     steps:
       - run: |
           echo 'Initial Dir'
+          cd ..
           pwd
           echo 'Creating test dir in root'
           cd .. && mkdir test && cd test
