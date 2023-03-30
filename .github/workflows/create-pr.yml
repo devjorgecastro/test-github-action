@@ -15,6 +15,10 @@ jobs:
     steps:
       - name: "Cloning repository"
         uses: actions/checkout@v2
+        run: |
+          pwd && ls -a
+          git checkout -b chore/update-tokens
+          git branch --show-current
       
       - name: "List current directory"
         run: pwd && ls -a
@@ -40,7 +44,7 @@ jobs:
             echo "HAS_CHANGES=false" >> $GITHUB_OUTPUT
           fi
 
-      - name: 'List working-directory'
+      - name: 'Create Pull Request'
         if: ${{ steps.updating_tokens.outputs.HAS_CHANGES }}
         run: |
           cd test-github-action && pwd && ls -a
