@@ -20,6 +20,7 @@ jobs:
         run: |
           git config user.name 'Jorge Castro'
           git config user.email 'dev.jorgecastro@gmail.com'
+          git remote set-url "https://${{ secrets.GH_TOKEN }}@github.com/devjorgecastro/test-github-action.git"
 
       - name: 'Cloning cornershop-customer-app-translation'
         # cornershop-customer-app-translations is created because the cloned repository is the same
