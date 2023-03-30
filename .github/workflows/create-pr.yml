@@ -45,7 +45,9 @@ jobs:
 
       - name: 'Saving changes'
         if: ${{ steps.updating_tokens.outputs.HAS_CHANGES }}
-        run: git add .; git commit -m 'Tokens were updated'; git push
+        run: |
+          git add .; git commit -m 'Tokens were updated'
+          git push -u origin chore/update-tokens
 
       - name: Create Pull Request
         id: create_pull_request
