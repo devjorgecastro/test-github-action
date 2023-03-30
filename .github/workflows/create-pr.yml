@@ -12,6 +12,7 @@ jobs:
     steps:
       - run: |
           echo 'Current branch'
+          pwd
           git rev-parse --abbrev-ref HEAD
           echo 'Initial Dir'
           pwd
