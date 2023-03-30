@@ -59,7 +59,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          git remote set-url origin https://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@github.com/devjorgecastrotest/test-github-action.git
+          #git remote set-url origin https://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@github.com/devjorgecastro/test-github-action.git
           #git remote set-url origin https://x-access-token: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@github.com/devjorgecastro/test-github-action.git
           git remote -v
           git add .
