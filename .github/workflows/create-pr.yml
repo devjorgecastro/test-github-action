@@ -42,17 +42,16 @@ jobs:
           fi
 
       - name: Update Comment
-        uses: peter-evans/add-comment@v2
-        env:
-          GITHUB_TOKEN: ${{ secrets.GH_ACTION_TOKEN }}
+        uses: peter-evans/create-or-update-comment@v2
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.GH_ACTION_TOKEN }}
+          issue-number: ${{ github.event.issue.number }}
           body: |
             ${{ github.event.comment.body }}
 
             Se ha creado un Pull Request para actualizar los tokens
             link del Pull request https://github.com/${{ github.repository }}/pull/${{ github.event.issue.number }}
-          issue-number: ${{ github.event.issue.number }}
+          reactions: '+1'
           if: steps.extract_command.outputs.command != ''
 
 
