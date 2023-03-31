@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Extract Pull Request Info
-      if: contains(github.event.comment.body, '/update-tokens') && github.event.issue.pull_request
+      if: github.event.action == 'created' && contains(github.event.comment.body, '/update-tokens') && github.event.issue.pull_request
       run: |
         # Obtener el número del pull request a partir de la URL
         PR_NUMBER=$(echo "${{ github.event.issue.pull_request.url }}" | sed 's#.*/##')
@@ -29,11 +29,11 @@ jobs:
   pr_commented:
   # This job only runs for pull request comments
     name: PR Comment
-    if: contains(github.event.comment.body, '/update-tokens') && github.event.issue.pull_request
     needs: extract_pr_info
     runs-on: ubuntu-latest
     steps:
       - name: Checking remote branch
+        if: github.event.action == 'created' && contains(github.event.comment.body, '/update-tokens') && github.event.issue.pull_request
         run: |
           if ! git ls-remote --heads origin chore/update-tokens | grep -q chore/update-tokens; then
             echo "NEW_BRANCH_EXIST=false" >> $GITHUB_OUTPUT
@@ -49,8 +49,9 @@ jobs:
           body: |
             ${{ github.event.comment.body }}
 
-            Se ha creado un Pull Request para actualizar los tokens
-            link del Pull request https://github.com/${{ github.repository }}/pull/${{ github.event.issue.number }}
+            - Comment Id = ${{ github.event.comment.id }}
+            - Se ha creado un Pull Request para actualizar los tokens
+            - link del Pull request https://github.com/${{ github.repository }}/pull/${{ github.event.issue.number }}
           reactions: '+1'
           if: steps.extract_command.outputs.command != ''
 
