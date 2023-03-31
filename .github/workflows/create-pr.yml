@@ -75,15 +75,13 @@ jobs:
           ls -a
           git ls-remote --heads origin chore/update-tokens
           git branch -vv
-          while ! git ls-remote --exit-code --heads origin main; do
-            sleep 1
-          done
         env:
           GITHUB_TOKEN: ${{ secrets.GH_ACTION_TOKEN }}
 
       - name: Create Pull Request
         id: create_pull_request
         if: ${{ steps.updating_tokens.outputs.HAS_CHANGES }}
+        needs: saving_changes
         uses: peter-evans/create-pull-request@v4
         with:
           base: release/1.0.0
