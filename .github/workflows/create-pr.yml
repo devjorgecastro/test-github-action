@@ -4,13 +4,8 @@ on:
     type: [created]
 
 jobs:
-  pr_commented:
-  # This job only runs for pull request comments
-    name: PR Comment
-    if: contains(github.event.comment.body, '/update-tokens') && github.event.issue.pull_request
-    runs-on: ubuntu-latest
-    steps:
-    - name: Pull Request Info
+  extract_pr_info:
+    - name: Extract Pull Request Info
       run: |
         # Obtener el número del pull request a partir de la URL
         PR_NUMBER=$(echo "${{ github.event.issue.pull_request.url }}" | sed 's#.*/##')
@@ -21,9 +16,95 @@ jobs:
         # Extraer la información del pull request
         PR_BASE=$(echo "${PR_INFO}" | jq -r '.base.ref')
         PR_HEAD=$(echo "${PR_INFO}" | jq -r '.head.ref')
-        PR_BODY=$(echo "${PR_INFO}" | jq -r '.body')
+        PR_DESCRIPTION=$(echo "${PR_INFO}" | jq -r '.body')
 
-        # Imprimir la información del pull request
-        echo "La rama base del PR es: ${PR_BASE}"
-        echo "La rama de cambios del PR es: ${PR_HEAD}"
-        echo "El mensaje del PR es: ${PR_BODY}"
+        echo "PR_BASE=${PR_BASE}" >> $GITHUB_ENV
+        echo "PR_HEAD=${PR_HEAD}" >> $GITHUB_ENV
+        echo "PR_DESCRIPTION=${PR_DESCRIPTION}" >> $GITHUB_ENV
+    
+
+jobs:
+  pr_commented:
+  # This job only runs for pull request comments
+    name: PR Comment
+    if: contains(github.event.comment.body, '/update-tokens') && github.event.issue.pull_request
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Cloning repository"
+        uses: actions/checkout@v3
+
+      #- name: Authenticate with Github
+      #  run: echo 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 > ~/.github_token && git config --global credential.helper 'store --file ~/.github_token'
+
+      - name: "Create new branch"
+        run: |
+          echo "pull request head = ${{ env.PR_HEAD }}"
+          git fetch
+          git checkout release/1.0.0
+          git checkout -b chore/update-tokens
+
+      - name: Initialize bot git config
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          #git remote set-url origin https://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@github.com/devjorgecastro/test-github-action.git
+
+      - name: 'Cloning cornershop-customer-app-translation'
+        # cornershop-customer-app-translations is created because the cloned repository is the same
+        working-directory: ../
+        run: |
+          mkdir cornershop-customer-app-translations && cd cornershop-customer-app-translations
+          git clone https://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@github.com/devjorgecastro/test-github-action.git
+          chmod +x ./test-github-action/script.sh
+
+      
+      - name: 'Updating tokens'
+        id: updating_tokens
+        working-directory: ../
+        run: |
+          pwd && ls -a
+          ./cornershop-customer-app-translations/test-github-action/script.sh
+          echo 'Showing remote'
+          cd test-github-action
+          echo '<<< current branch >>>'
+          git branch --show-current
+          if [ -n "$(git status --porcelain)" ]; then
+            echo "HAS_CHANGES=true" >> $GITHUB_OUTPUT
+          else
+            echo "HAS_CHANGES=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: 'Saving changes'
+        id: saving_changes
+        if: ${{ steps.updating_tokens.outputs.HAS_CHANGES }}
+        run: |
+          #git remote set-url origin https://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@github.com/devjorgecastro/test-github-action.git
+          #git remote set-url origin https://x-access-token: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@github.com/devjorgecastro/test-github-action.git
+          git remote -v
+          git add .
+          git commit -m 'Tokens were updated'
+          git log -1
+          echo '<<< Push new Branch >>>'
+          git push --set-upstream origin chore/update-tokens
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_ACTION_TOKEN }}
+
+      - name: Create Pull Request
+        id: create_pull_request
+        if: ${{ steps.updating_tokens.outputs.HAS_CHANGES }}
+        uses: actions/github-script@v4
+        with:
+          github-token: ${{ secrets.GH_ACTION_TOKEN }}
+          script: |
+            const title = 'Update tokens';
+            const baseRef = 'release/1.0.0';
+            const headRef = 'chore/update-tokens';
+            const { data: pullRequest } = await github.pulls.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title,
+              base: baseRef,
+              head: headRef,
+              body: `This pull request updates tokens.`
+            });
+            console.log(`Created pull request: ${pullRequest.html_url}`);
