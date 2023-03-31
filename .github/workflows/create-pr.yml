@@ -42,18 +42,17 @@ jobs:
           fi
 
       - name: Update Comment
+        if: github.event.comment.body == '/update-tokens' && github.event.issue.pull_request
         uses: peter-evans/create-or-update-comment@v2
         with:
           token: ${{ secrets.GH_ACTION_TOKEN }}
           comment-id: ${{ github.event.comment.id }}
           body: |
-            ${{ github.event.comment.body }}
 
             - Comment Id = ${{ github.event.comment.id }}
             - Se ha creado un Pull Request para actualizar los tokens
             - link del Pull request https://github.com/${{ github.repository }}/pull/${{ github.event.issue.number }}
           reactions: '+1'
-          if: github.event.comment.body == '/update-tokens' && github.event.issue.pull_request
 
 
       - name: "Cloning repository"
