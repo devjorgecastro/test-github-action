@@ -68,7 +68,7 @@ jobs:
             - Comment Id = ${{ github.event.comment.id }}
             - Se ha creado un Pull Request para actualizar los tokens
             - link del Pull request https://github.com/${{ github.repository }}/pull/${{ github.event.issue.number }}
-          reactions: '+1'
+          reactions: 'eyes, rocket'
 
 
       - name: "Cloning repository"
