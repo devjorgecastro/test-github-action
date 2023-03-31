@@ -30,6 +30,7 @@ jobs:
   # This job only runs for pull request comments
     name: PR Comment
     if: contains(github.event.comment.body, '/update-tokens') && github.event.issue.pull_request
+    needs: extract_pr_info
     runs-on: ubuntu-latest
     steps:
       - name: "Cloning repository"
