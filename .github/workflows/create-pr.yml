@@ -29,7 +29,7 @@ jobs:
   
   create_pull_request:
   # This job only runs for pull request comments
-    name: "Pull Request to update ${{ env.PR_HEAD }} tokens"
+    name: Pull Request to update ${ env.PR_HEAD } tokens
     needs: extract_pr_info
     runs-on: ubuntu-latest
     steps:
