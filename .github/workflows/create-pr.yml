@@ -65,10 +65,8 @@ jobs:
           comment-id: ${{ github.event.comment.id }}
           body: |
 
-            - Comment Id = ${{ github.event.comment.id }}
-            - Se ha creado un Pull Request para actualizar los tokens
-            - link del Pull request https://github.com/${{ github.repository }}/pull/${{ github.event.issue.number }}
-          reactions: 'eyes, rocket'
+            Processing... ⏳ 🙇🏽
+          reactions: 'eyes'
 
 
       - name: "Cloning repository"
@@ -147,3 +145,19 @@ jobs:
               body: `This pull request updates tokens.`
             });
             console.log(`Created pull request: ${pullRequest.html_url}`);
+
+      - name: Update Comment before pull request was created
+        if: github.event.comment.body == '/update-tokens' && github.event.issue.pull_request
+        uses: peter-evans/create-or-update-comment@v2
+        with:
+          token: ${{ secrets.GH_ACTION_TOKEN }}
+          comment-id: ${{ github.event.comment.id }}
+          body: |
+            ${{ github.event.comment.body }}
+
+            The pull request to refresh the xxxxx branch tokens has been created successfully.
+            Please don't forget to check the upgrade tokens before merging to this release branch.
+
+            - link del Pull request https://github.com/${{ github.repository }}/pull/${{ github.event.issue.number }}
+          reactions: 'eyes, rocket'
+          edit-mode: replace
