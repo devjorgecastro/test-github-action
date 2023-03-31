@@ -7,7 +7,7 @@ jobs:
   pr_commented:
   # This job only runs for pull request comments
     name: PR Comment
-    if: contains(github.event.comment.body, '/update-tokens') && github.event.issue.pull_request
+    if: contains(github.event.comment.body, '/rafa-cv-update-tokens') && github.event.issue.pull_request
     runs-on: ubuntu-latest
     steps:
       - name: "Cloning repository"
@@ -68,13 +68,6 @@ jobs:
           git log -1
           echo '<<< Push new Branch >>>'
           git push --set-upstream origin chore/update-tokens
-          echo '<<< git pull >>>'
-          git log -1
-          git pull
-          git push origin chore/update-tokens -f
-          ls -a
-          git ls-remote --heads origin chore/update-tokens
-          git branch -vv
         env:
           GITHUB_TOKEN: ${{ secrets.GH_ACTION_TOKEN }}
 
@@ -97,13 +90,3 @@ jobs:
               body: `This pull request updates tokens.`
             });
             console.log(`Created pull request: ${pullRequest.html_url}`);
-        # uses: peter-evans/create-pull-request@v4
-        # with:
-          # base: release/1.0.0
-          # branch: chore/update-tokens
-          # title: Titulo de Prueba
-          # body: |
-          #   Esta es una descripcion de prueba de varias lineas
-          #   Esta es la segunda linea en la descripcion.
-          #   Este es otro parrafo en la tercera linea de la descripcion del PR
-          # token: ${{ secrets.GH_ACTION_TOKEN }}
