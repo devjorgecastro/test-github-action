@@ -10,8 +10,13 @@ jobs:
     steps:
     - name: Extract Pull Request Info
       id: extract_pull_request_info
-      if: github.event.comment.body == '/update-tokens' && github.event.issue.pull_request
+      if: github.event.issue.pull_request
       run: |
+        if [ "${{ github.event.comment.body }}" != "/update-tokens"]; then
+          echo "The comment is different to '/update-tokens'"
+          exit 1
+        fi
+
         # Obtener el número del pull request a partir de la URL
         PR_NUMBER=$(echo "${{ github.event.issue.pull_request.url }}" | sed 's#.*/##')
 
@@ -25,10 +30,11 @@ jobs:
 
         echo "PR_BASE=${PR_BASE}" >> $GITHUB_ENV
         echo "PR_HEAD=${PR_HEAD}" >> $GITHUB_ENV
-        echo "PR_HEAD=${PR_HEAD}" >> $GITHUB_OUTPUT
         echo "PR_DESCRIPTION=${PR_DESCRIPTION}" >> $GITHUB_ENV
     outputs:
-      PR_HEAD: ${{ steps.extract_pull_request_info.outputs.PR_HEAD }}
+      PR_BASE: ${{ env.PR_BASE }}
+      PR_HEAD: ${{ env.PR_HEAD }}
+      PR_DESCRIPTION: ${{ env.PR_DESCRIPTION }}
   
   create_pull_request:
   # This job only runs for pull request comments
