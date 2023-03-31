@@ -63,10 +63,10 @@ jobs:
 
 
       - name: "Cloning repository"
-        if: ${{ steps.extract_pull_request_info.outcome == 'success' }}
         uses: actions/checkout@v3
       - name: "Create new branch"
         run: |
+          echo "SHOW INFO = ${{ steps.extract_pull_request_info.outcome }}"
           echo "pull request head = ${{ env.PR_HEAD }}"
           git fetch
           git checkout release/1.0.0
