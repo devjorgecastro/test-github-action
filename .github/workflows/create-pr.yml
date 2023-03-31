@@ -27,6 +27,8 @@ jobs:
         echo "PR_HEAD=${PR_HEAD}" >> $GITHUB_ENV
         echo "PR_HEAD=${PR_HEAD}" >> $GITHUB_OUTPUT
         echo "PR_DESCRIPTION=${PR_DESCRIPTION}" >> $GITHUB_ENV
+    outputs:
+      PR_HEAD: ${{ steps.extract_pull_request_info.outputs.PR_HEAD }}
   
   create_pull_request:
   # This job only runs for pull request comments
