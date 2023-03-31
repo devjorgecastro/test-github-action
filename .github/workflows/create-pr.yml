@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Extract Pull Request Info
-      if: github.event.action == 'created' && github.event.comment.body == '/update-tokens' && github.event.issue.pull_request
+      if: github.event.comment.body == '/update-tokens' && github.event.issue.pull_request
       run: |
         # Obtener el número del pull request a partir de la URL
         PR_NUMBER=$(echo "${{ github.event.issue.pull_request.url }}" | sed 's#.*/##')
@@ -33,7 +33,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checking remote branch
-        if: github.event.action == 'created' && github.event.comment.body == '/update-tokens' && github.event.issue.pull_request
+        if: github.event.comment.body == '/update-tokens' && github.event.issue.pull_request
         run: |
           if ! git ls-remote --heads origin chore/update-tokens | grep -q chore/update-tokens; then
             echo "NEW_BRANCH_EXIST=false" >> $GITHUB_OUTPUT
