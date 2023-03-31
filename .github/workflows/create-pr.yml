@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Extract Pull Request Info
-      if: contains(github.event.comment.body, '/update-tokens') && github.event.issue.pull_request
+      if: github.event.action == 'created' && contains(github.event.comment.body, '/update-tokens') && github.event.issue.pull_request
       run: |
         # Obtener el número del pull request a partir de la URL
         PR_NUMBER=$(echo "${{ github.event.issue.pull_request.url }}" | sed 's#.*/##')
@@ -29,7 +29,7 @@ jobs:
   pr_commented:
   # This job only runs for pull request comments
     name: PR Comment
-    if: contains(github.event.comment.body, '/update-tokens') && github.event.issue.pull_request
+    if: github.event.action == 'created' && contains(github.event.comment.body, '/update-tokens') && github.event.issue.pull_request
     needs: extract_pr_info
     runs-on: ubuntu-latest
     steps:
