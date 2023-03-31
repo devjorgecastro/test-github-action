@@ -7,7 +7,7 @@ jobs:
   pr_commented:
   # This job only runs for pull request comments
     name: PR Comment
-    if: contains(github.event.comment.body, '/rafa-cv-update-tokens') && github.event.issue.pull_request
+    if: contains(github.event.comment.body, '/update-tokens') && github.event.issue.pull_request
     runs-on: ubuntu-latest
     steps:
       - name: "Cloning repository"
