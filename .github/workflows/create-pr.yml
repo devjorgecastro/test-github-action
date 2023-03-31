@@ -11,6 +11,12 @@ jobs:
     - name: Extract Pull Request Info
       if: github.event.comment.body == '/update-tokens' && github.event.issue.pull_request
       run: |
+
+        if [ "${{ github.event.comment.body }}" != "/update-tokens"]; then
+          echo "The comment is different to '/update-tokens'"
+          exit 1
+        fi
+
         # Obtener el número del pull request a partir de la URL
         PR_NUMBER=$(echo "${{ github.event.issue.pull_request.url }}" | sed 's#.*/##')
 
