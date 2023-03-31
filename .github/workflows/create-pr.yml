@@ -5,22 +5,23 @@ on:
 
 jobs:
   extract_pr_info:
-    - name: Extract Pull Request Info
-      run: |
-        # Obtener el número del pull request a partir de la URL
-        PR_NUMBER=$(echo "${{ github.event.issue.pull_request.url }}" | sed 's#.*/##')
+    name: Extract Pull Request Info
+    runs-on: ubuntu-latest
+    run: |
+      # Obtener el número del pull request a partir de la URL
+      PR_NUMBER=$(echo "${{ github.event.issue.pull_request.url }}" | sed 's#.*/##')
 
-        # Obtener información del pull request usando la API de GitHub
-        PR_INFO=$(curl -s -H "Authorization: Bearer ${{ secrets.GH_ACTION_TOKEN }}" https://api.github.com/repos/${{ github.repository }}/pulls/${PR_NUMBER})
+      # Obtener información del pull request usando la API de GitHub
+      PR_INFO=$(curl -s -H "Authorization: Bearer ${{ secrets.GH_ACTION_TOKEN }}" https://api.github.com/repos/${{ github.repository }}/pulls/${PR_NUMBER})
 
-        # Extraer la información del pull request
-        PR_BASE=$(echo "${PR_INFO}" | jq -r '.base.ref')
-        PR_HEAD=$(echo "${PR_INFO}" | jq -r '.head.ref')
-        PR_DESCRIPTION=$(echo "${PR_INFO}" | jq -r '.body')
+      # Extraer la información del pull request
+      PR_BASE=$(echo "${PR_INFO}" | jq -r '.base.ref')
+      PR_HEAD=$(echo "${PR_INFO}" | jq -r '.head.ref')
+      PR_DESCRIPTION=$(echo "${PR_INFO}" | jq -r '.body')
 
-        echo "PR_BASE=${PR_BASE}" >> $GITHUB_ENV
-        echo "PR_HEAD=${PR_HEAD}" >> $GITHUB_ENV
-        echo "PR_DESCRIPTION=${PR_DESCRIPTION}" >> $GITHUB_ENV
+      echo "PR_BASE=${PR_BASE}" >> $GITHUB_ENV
+      echo "PR_HEAD=${PR_HEAD}" >> $GITHUB_ENV
+      echo "PR_DESCRIPTION=${PR_DESCRIPTION}" >> $GITHUB_ENV
   
   pr_commented:
   # This job only runs for pull request comments
