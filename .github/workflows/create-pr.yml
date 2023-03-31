@@ -25,11 +25,12 @@ jobs:
 
         echo "PR_BASE=${PR_BASE}" >> $GITHUB_ENV
         echo "PR_HEAD=${PR_HEAD}" >> $GITHUB_ENV
+        echo "PR_HEAD=${PR_HEAD}" >> $GITHUB_OUTPUT
         echo "PR_DESCRIPTION=${PR_DESCRIPTION}" >> $GITHUB_ENV
   
   create_pull_request:
   # This job only runs for pull request comments
-    name: Pull Request to update ${ env.PR_HEAD } tokens
+    name: "Pull Request to update ${{ needs.extract_pr_info.outputs.PR_HEAD }} tokens"
     needs: extract_pr_info
     runs-on: ubuntu-latest
     steps:
