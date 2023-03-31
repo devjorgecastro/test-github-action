@@ -82,7 +82,6 @@ jobs:
       - name: Create Pull Request
         id: create_pull_request
         if: ${{ steps.updating_tokens.outputs.HAS_CHANGES }}
-        needs: saving_changes
         uses: peter-evans/create-pull-request@v4
         with:
           base: release/1.0.0
