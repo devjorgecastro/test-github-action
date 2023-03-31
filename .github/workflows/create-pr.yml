@@ -43,8 +43,10 @@ jobs:
 
       - name: Update Comment
         uses: peter-evans/add-comment@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_ACTION_TOKEN }}
         with:
-          token: ${{ secrets.GH_ACTION_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
           body: |
             ${{ github.event.comment.body }}
 
