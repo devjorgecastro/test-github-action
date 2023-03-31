@@ -83,7 +83,7 @@ jobs:
         if: ${{ steps.updating_tokens.outputs.HAS_CHANGES }}
         uses: actions/github-script@v4
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          github-token: ${{ secrets.GH_ACTION_TOKEN }}
           script: |
             const title = 'Update tokens';
             const baseRef = 'release/1.0.0';
