@@ -5,9 +5,11 @@ on:
 
 jobs:
   extract_pr_info:
-    name: Extract Pull Request Info
+    name: Pull Request Info
     runs-on: ubuntu-latest
-    run: |
+    steps:
+    - name: Extract Pull Request Info
+      run: |
       # Obtener el número del pull request a partir de la URL
       PR_NUMBER=$(echo "${{ github.event.issue.pull_request.url }}" | sed 's#.*/##')
 
