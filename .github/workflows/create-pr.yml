@@ -33,12 +33,29 @@ jobs:
     needs: extract_pr_info
     runs-on: ubuntu-latest
     steps:
+      - name: Checking remote branch
+        run: |
+          if ! git ls-remote --heads origin chore/update-tokens | grep -q chore/update-tokens; then
+            echo "NEW_BRANCH_EXIST=false" >> $GITHUB_OUTPUT
+          else
+            echo "NEW_BRANCH_EXIST=true" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Update Comment
+        uses: peter-evans/add-comment@v2
+        with:
+          token: ${{ secrets.GH_ACTION_TOKEN }}
+          body: |
+            ${{ github.event.comment.body }}
+
+            Se ha creado un Pull Request para actualizar los tokens
+            link del Pull request https://github.com/${{ github.repository }}/pull/${{ github.event.issue.number }}
+          issue-number: ${{ github.event.issue.number }}
+          if: steps.extract_command.outputs.command != ''
+
+
       - name: "Cloning repository"
         uses: actions/checkout@v3
-
-      #- name: Authenticate with Github
-      #  run: echo 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 > ~/.github_token && git config --global credential.helper 'store --file ~/.github_token'
-
       - name: "Create new branch"
         run: |
           echo "pull request head = ${{ env.PR_HEAD }}"
@@ -81,12 +98,8 @@ jobs:
         id: saving_changes
         if: ${{ steps.updating_tokens.outputs.HAS_CHANGES }}
         run: |
-          #git remote set-url origin https://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@github.com/devjorgecastro/test-github-action.git
-          #git remote set-url origin https://x-access-token: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@github.com/devjorgecastro/test-github-action.git
-          git remote -v
           git add .
           git commit -m 'Tokens were updated'
-          git log -1
           echo '<<< Push new Branch >>>'
           git push --set-upstream origin chore/update-tokens
         env:
