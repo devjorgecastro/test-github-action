@@ -75,7 +75,9 @@ jobs:
           ls -a
           git ls-remote --heads origin chore/update-tokens
           git branch -vv
+          echo 'wait for 10 seconds'
           sleep 10
+          echo 'continue'
         env:
           GITHUB_TOKEN: ${{ secrets.GH_ACTION_TOKEN }}
 
