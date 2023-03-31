@@ -9,6 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Extract Pull Request Info
+      id: extract_pull_request_info
       if: github.event.comment.body == '/update-tokens' && github.event.issue.pull_request
       run: |
 
@@ -62,6 +63,7 @@ jobs:
 
 
       - name: "Cloning repository"
+        if: ${{ steps.extract_pull_request_info.outcome == 'success' }}
         uses: actions/checkout@v3
       - name: "Create new branch"
         run: |
@@ -71,12 +73,14 @@ jobs:
           git checkout -b chore/update-tokens
 
       - name: Initialize bot git config
+        if: ${{ steps.extract_pull_request_info.outcome == 'success' }}
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email 'github-actions[bot]@users.noreply.github.com'
           #git remote set-url origin https://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@github.com/devjorgecastro/test-github-action.git
 
       - name: 'Cloning cornershop-customer-app-translation'
+        if: ${{ steps.extract_pull_request_info.outcome == 'success' }}
         # cornershop-customer-app-translations is created because the cloned repository is the same
         working-directory: ../
         run: |
@@ -86,6 +90,7 @@ jobs:
 
       
       - name: 'Updating tokens'
+        if: ${{ steps.extract_pull_request_info.outcome == 'success' }}
         id: updating_tokens
         working-directory: ../
         run: |
