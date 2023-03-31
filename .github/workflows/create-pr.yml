@@ -75,22 +75,35 @@ jobs:
           ls -a
           git ls-remote --heads origin chore/update-tokens
           git branch -vv
-          echo 'wait for 10 seconds'
-          sleep 10
-          echo 'continue'
         env:
           GITHUB_TOKEN: ${{ secrets.GH_ACTION_TOKEN }}
 
       - name: Create Pull Request
         id: create_pull_request
         if: ${{ steps.updating_tokens.outputs.HAS_CHANGES }}
-        uses: peter-evans/create-pull-request@v4
+        uses: actions/github-script@v4
         with:
-          base: release/1.0.0
-          branch: chore/update-tokens
-          title: Titulo de Prueba
-          body: |
-            Esta es una descripcion de prueba de varias lineas
-            Esta es la segunda linea en la descripcion.
-            Este es otro parrafo en la tercera linea de la descripcion del PR
-          token: ${{ secrets.GH_ACTION_TOKEN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const title = 'Update tokens';
+            const baseRef = 'release/1.0.0';
+            const headRef = 'chore/update-tokens';
+            const { data: pullRequest } = await github.pulls.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title,
+              base: baseRef,
+              head: headRef,
+              body: `This pull request updates tokens.`
+            });
+            console.log(`Created pull request: ${pullRequest.html_url}`);
+        # uses: peter-evans/create-pull-request@v4
+        # with:
+          # base: release/1.0.0
+          # branch: chore/update-tokens
+          # title: Titulo de Prueba
+          # body: |
+          #   Esta es una descripcion de prueba de varias lineas
+          #   Esta es la segunda linea en la descripcion.
+          #   Este es otro parrafo en la tercera linea de la descripcion del PR
+          # token: ${{ secrets.GH_ACTION_TOKEN }}
