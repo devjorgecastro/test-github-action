@@ -1,7 +1,7 @@
 name: Test Action
 on:
-  push:
-    branches: [feature/github_action_changes]
+  issue_comment:
+    types: [created]
 jobs:
   build:
     runs-on: ubuntu-latest
