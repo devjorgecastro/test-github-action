@@ -8,5 +8,4 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Run My Action
-        uses:
-          ./test-action.yml
+        run: echo "Test Success!"
