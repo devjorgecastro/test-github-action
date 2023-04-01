@@ -1,8 +1,8 @@
 name: Test Action
 on:
-  issue_comment:
-    types: [created]
-    branches: [feature/github_action_changes]
+  push:
+    branches:
+     - '^release\/\d+\.\d+\.\d+$'
 jobs:
   build:
     runs-on: ubuntu-latest
