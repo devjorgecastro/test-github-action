@@ -1,3 +1,4 @@
+# This an example of Github Action with YAML file
 name: Update Tokens in Release
 on:
   issue_comment:
