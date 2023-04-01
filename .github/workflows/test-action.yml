@@ -2,7 +2,7 @@ name: Test Action
 on:
   push:
     branches:
-     - '^release\/\d+\.\d+\.\d+$'
+     - '.*feature/.*'
 jobs:
   build:
     runs-on: ubuntu-latest
