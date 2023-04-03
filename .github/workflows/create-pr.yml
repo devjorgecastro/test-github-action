@@ -21,6 +21,7 @@ jobs:
         bash --version
 
   extract_pr_info:
+    needs: check_bash_version
     name: Pull Request Info
     runs-on: ubuntu-latest
     steps:
