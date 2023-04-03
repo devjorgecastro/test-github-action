@@ -4,6 +4,21 @@ on:
     type: [created]
 
 jobs:
+  check_bash_version:
+    name: Check Bash Version
+    runs-on: ubuntu-20.04
+    steps:
+      run: |
+        sudo apt-get update
+        sudo apt-get install build-essential
+        wget http://ftp.gnu.org/gnu/bash/bash-3.2.57.tar.gz
+        tar -zxvf bash-3.2.57.tar.gz
+        cd bash-3.2.57
+        ./configure
+        make
+        sudo make install
+        bash --version
+
   extract_pr_info:
     name: Pull Request Info
     runs-on: ubuntu-latest
