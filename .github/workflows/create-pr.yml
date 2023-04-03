@@ -15,10 +15,11 @@ jobs:
         wget http://ftp.gnu.org/gnu/bash/bash-3.2.57.tar.gz
         tar -zxvf bash-3.2.57.tar.gz
         cd bash-3.2.57
-        ./configure
+        ./configure --prefix=/usr/local/bash-3.2.57
         make
         sudo make install
         bash --version
+        /usr/local/bash-3.2.57/bin/bash --version
 
   extract_pr_info:
     needs: check_bash_version
