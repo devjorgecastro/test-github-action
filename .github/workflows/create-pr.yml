@@ -6,7 +6,7 @@ on:
 jobs:
   check_bash_version:
     name: Check Bash Version
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-17.04
     steps:
     - name: Install bash 3
       run: |
